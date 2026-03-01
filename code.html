@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Glizer - AI Therapist</title>
+    <!-- Secure HTTPS scripts and styles -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
@@ -120,6 +121,7 @@
     </main>
 
     <script type="module">
+        // Using HTTPS-specific Firebase imports
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
         import { getAuth, signInAnonymously, onAuthStateChanged, GoogleAuthProvider, OAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
         import { getFirestore, collection, addDoc, onSnapshot, serverTimestamp, query, orderBy, doc, setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
@@ -163,7 +165,6 @@
                     else if (provider === 'microsoft') authProvider = new OAuthProvider('microsoft.com');
                     else if (provider === 'x') authProvider = new OAuthProvider('twitter.com');
                     
-                    // USE POPUP instead of REDIRECT to avoid iframe/sandbox errors
                     await signInWithPopup(auth, authProvider);
                 }
             } catch (err) { showError(err.message); }
@@ -231,7 +232,7 @@
                     btn.onclick = () => selectSession(docSnap.id, data.title);
                     list.appendChild(btn);
                 });
-            });
+            }, (error) => console.error("Session fetch error:", error));
         }
 
         async function startNewSession() {
@@ -251,7 +252,7 @@
             document.getElementById('currentSessionTitle').innerText = title;
             document.getElementById('chatArea').innerHTML = '';
             
-            loadSessions(); // Update UI active states
+            loadSessions();
 
             const msgCol = collection(db, 'artifacts', appId, 'users', user.uid, 'sessions', id, 'messages');
             unsubscribeMessages = onSnapshot(query(msgCol, orderBy('timestamp', 'asc')), (snap) => {
@@ -263,10 +264,11 @@
                     const d = m.data();
                     appendUI(d.text, d.role);
                 });
-            });
+            }, (error) => console.error("Message fetch error:", error));
         }
 
         async function callGemini(messages) {
+            // Secure API call endpoint
             const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
             const system = `You are Glizer, a warm AI therapist. 
             MANDATORY: If this is the start of a conversation, create a short (2-3 words) title for this session and include it exactly as [TITLE: your title] at the START of your message.
