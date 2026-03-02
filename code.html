@@ -4,7 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Glizer - AI Therapist</title>
-    <!-- Secure HTTPS scripts and styles -->
+    
+    <!-- ADVANCED DNS & RESOURCE PRE-OPTIMIZATION -->
+    <!-- Resolve DNS early for critical API and Asset domains -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//www.gstatic.com">
+    <link rel="dns-prefetch" href="//cdn.tailwindcss.com">
+    <link rel="dns-prefetch" href="//generativelanguage.googleapis.com">
+    <link rel="dns-prefetch" href="//firestore.googleapis.com">
+    
+    <!-- Preconnect for low-latency handshakes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://generativelanguage.googleapis.com" crossorigin>
+
+    <!-- Secure HTTPS scripts -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
@@ -20,6 +36,9 @@
         ::-webkit-scrollbar { width: 5px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
+        
+        /* Improved Input accessibility */
+        #userInput:disabled { cursor: not-allowed; opacity: 0.6; }
     </style>
 </head>
 <body>
@@ -43,23 +62,23 @@
                 <button onclick="showStep(1)" class="mb-4 text-slate-400 hover:text-indigo-600 flex items-center gap-1 text-sm transition-colors"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg> Back</button>
                 <h3 class="text-xl font-bold mb-6 text-slate-800">Choose a provider</h3>
                 <div class="space-y-3">
-                    <button onclick="authAction('google')" class="w-full flex items-center gap-3 border border-slate-200 p-3.5 rounded-xl hover:bg-slate-50 font-medium text-sm transition-all"><img src="https://www.gstatic.com/images/branding/product/1x/googleg_48dp.png" class="w-5 h-5"> Continue with Google</button>
-                    <button onclick="authAction('microsoft')" class="w-full flex items-center gap-3 border border-slate-200 p-3.5 rounded-xl hover:bg-slate-50 font-medium text-sm transition-all"><img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" class="w-5 h-5"> Continue with Microsoft</button>
+                    <button onclick="authAction('google')" class="w-full flex items-center gap-3 border border-slate-200 p-3.5 rounded-xl hover:bg-slate-50 font-medium text-sm transition-all"><img src="https://www.gstatic.com/images/branding/product/1x/googleg_48dp.png" class="w-5 h-5" alt="Google"> Continue with Google</button>
+                    <button onclick="authAction('microsoft')" class="w-full flex items-center gap-3 border border-slate-200 p-3.5 rounded-xl hover:bg-slate-50 font-medium text-sm transition-all"><img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" class="w-5 h-5" alt="Microsoft"> Continue with Microsoft</button>
                     <button onclick="authAction('x')" class="w-full flex items-center gap-3 border border-slate-200 p-3.5 rounded-xl hover:bg-slate-50 font-medium text-sm transition-all"><svg class="w-5 h-5 fill-slate-900" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> Continue with X</button>
-                    <button onclick="showStep(3)" class="w-full flex items-center gap-3 border border-indigo-100 bg-indigo-50/30 p-3.5 rounded-xl hover:bg-indigo-50 font-medium text-sm text-indigo-700 transition-all"><svg class="w-5 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg> Use Email & Password</button>
+                    <button onclick="showStep(3)" class="w-full flex items-center gap-3 border border-indigo-100 bg-indigo-50/30 p-3.5 rounded-xl hover:bg-indigo-50 font-medium text-sm text-indigo-700 transition-all"><svg class="w-5 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg> Email & Password</button>
                 </div>
                 <button onclick="authAction('anon')" class="w-full mt-6 py-2 text-slate-400 text-[11px] font-bold uppercase tracking-widest hover:text-indigo-600 transition-colors">Anonymous Session</button>
             </div>
 
             <!-- Step 3: Email Form -->
             <div id="authStep3" class="hidden">
-                <button onclick="showStep(2)" class="mb-4 text-slate-400 hover:text-indigo-600 flex items-center gap-1 text-sm transition-colors">Back to providers</button>
+                <button onclick="showStep(2)" class="mb-4 text-slate-400 hover:text-indigo-600 flex items-center gap-1 text-sm transition-colors">Back</button>
                 <h3 class="text-xl font-bold mb-4 text-slate-800" id="emailFormTitle">Create Account</h3>
                 <div class="space-y-3">
-                    <input type="text" id="regUser" placeholder="Your Name" class="w-full p-3.5 border border-slate-200 rounded-xl text-sm focus:ring-2 ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all">
-                    <input type="email" id="regEmail" placeholder="Email Address" class="w-full p-3.5 border border-slate-200 rounded-xl text-sm focus:ring-2 ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all">
-                    <input type="password" id="regPass" placeholder="Password (min 6 chars)" class="w-full p-3.5 border border-slate-200 rounded-xl text-sm focus:ring-2 ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all">
-                    <button id="emailSubmitBtn" onclick="handleEmailAuth()" class="w-full bg-indigo-600 text-white py-3.5 rounded-xl font-bold shadow-lg shadow-indigo-100 hover:bg-indigo-700 transition-all">Sign Up</button>
+                    <input type="text" id="regUser" placeholder="Your Name" class="w-full p-3.5 border border-slate-200 rounded-xl text-sm focus:ring-2 ring-indigo-500/20 outline-none">
+                    <input type="email" id="regEmail" placeholder="Email Address" class="w-full p-3.5 border border-slate-200 rounded-xl text-sm focus:ring-2 ring-indigo-500/20 outline-none">
+                    <input type="password" id="regPass" placeholder="Password (min 6 chars)" class="w-full p-3.5 border border-slate-200 rounded-xl text-sm focus:ring-2 ring-indigo-500/20 outline-none">
+                    <button id="emailSubmitBtn" onclick="handleEmailAuth()" class="w-full bg-indigo-600 text-white py-3.5 rounded-xl font-bold shadow-lg hover:bg-indigo-700 transition-all">Sign Up</button>
                     <button onclick="toggleEmailMode()" id="emailToggleLink" class="w-full text-indigo-600 text-xs font-semibold mt-2 hover:underline">Already have an account? Log In</button>
                 </div>
             </div>
@@ -76,9 +95,7 @@
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
             </button>
         </div>
-        <div id="sessionList" class="flex-grow overflow-y-auto p-3 space-y-1">
-            <!-- Sessions list -->
-        </div>
+        <div id="sessionList" class="flex-grow overflow-y-auto p-3 space-y-1"></div>
         <div class="p-4 border-t bg-slate-50/50 flex items-center gap-3">
             <div id="userInitials" class="w-10 h-10 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold text-sm shadow-md">?</div>
             <div class="flex-grow min-w-0">
@@ -112,8 +129,8 @@
 
         <footer class="p-6 bg-white border-t border-slate-100">
             <div class="max-w-3xl mx-auto flex items-center gap-3 relative">
-                <input type="text" id="userInput" placeholder="Type what's on your mind..." class="flex-grow p-4 pr-14 rounded-2xl bg-slate-50 border border-slate-200 text-sm focus:bg-white transition-all outline-none ring-indigo-500/10 focus:ring-8">
-                <button id="sendBtn" class="absolute right-2 top-2 bottom-2 bg-indigo-600 text-white w-12 rounded-xl shadow-lg shadow-indigo-100 hover:bg-indigo-700 active:scale-90 transition-all flex items-center justify-center">
+                <input type="text" id="userInput" placeholder="Type what's on your mind..." disabled class="flex-grow p-4 pr-14 rounded-2xl bg-slate-50 border border-slate-200 text-sm focus:bg-white transition-all outline-none ring-indigo-500/10 focus:ring-8">
+                <button id="sendBtn" class="absolute right-2 top-2 bottom-2 bg-indigo-600 text-white w-12 rounded-xl shadow-lg hover:bg-indigo-700 active:scale-90 transition-all flex items-center justify-center">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
                 </button>
             </div>
@@ -121,9 +138,8 @@
     </main>
 
     <script type="module">
-        // Using HTTPS-specific Firebase imports
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
-        import { getAuth, signInAnonymously, onAuthStateChanged, GoogleAuthProvider, OAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+        import { getAuth, signInAnonymously, onAuthStateChanged, GoogleAuthProvider, OAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
         import { getFirestore, collection, addDoc, onSnapshot, serverTimestamp, query, orderBy, doc, setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
 
         const firebaseConfig = JSON.parse(__firebase_config);
@@ -139,10 +155,18 @@
         let isLoginMode = false;
         let unsubscribeMessages = null;
 
-        // UI Helpers
+        // AUTH WORKFLOW
+        const initAuth = async () => {
+            if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                await signInWithCustomToken(auth, __initial_auth_token);
+            }
+        };
+        initAuth();
+
         window.showStep = (n) => {
             ['authStep1', 'authStep2', 'authStep3'].forEach((id, i) => {
-                document.getElementById(id).classList.toggle('hidden', i + 1 !== n);
+                const el = document.getElementById(id);
+                if(el) el.classList.toggle('hidden', i + 1 !== n);
             });
             document.getElementById('authError').classList.add('hidden');
         };
@@ -164,7 +188,6 @@
                     if (provider === 'google') authProvider = new GoogleAuthProvider();
                     else if (provider === 'microsoft') authProvider = new OAuthProvider('microsoft.com');
                     else if (provider === 'x') authProvider = new OAuthProvider('twitter.com');
-                    
                     await signInWithPopup(auth, authProvider);
                 }
             } catch (err) { showError(err.message); }
@@ -174,20 +197,14 @@
             const email = document.getElementById('regEmail').value.trim();
             const pass = document.getElementById('regPass').value;
             const username = document.getElementById('regUser').value.trim();
-
-            if (!email || !pass) return showError("Please fill in all fields.");
-            if (!isLoginMode && !username) return showError("Please provide a name.");
-            if (pass.length < 6) return showError("Password must be at least 6 characters.");
-
+            if (!email || !pass) return showError("Required fields missing.");
             try {
                 if (isLoginMode) {
                     await signInWithEmailAndPassword(auth, email, pass);
                 } else {
                     const cred = await createUserWithEmailAndPassword(auth, email, pass);
                     await updateProfile(cred.user, { displayName: username });
-                    await setDoc(doc(db, 'artifacts', appId, 'users', cred.user.uid, 'profile', 'info'), {
-                        username, email, joined: serverTimestamp()
-                    });
+                    await setDoc(doc(db, 'artifacts', appId, 'users', cred.user.uid, 'profile', 'info'), { username, email, joined: serverTimestamp() });
                 }
             } catch (err) { showError(err.message); }
         };
@@ -200,19 +217,23 @@
 
         onAuthStateChanged(auth, (u) => {
             user = u;
+            const overlay = document.getElementById('authOverlay');
+            const input = document.getElementById('userInput');
             if (u) {
-                document.getElementById('authOverlay').classList.add('hidden');
+                overlay.classList.add('hidden');
+                input.disabled = false;
                 document.getElementById('userNameLabel').innerText = u.displayName || "Guest";
                 document.getElementById('userEmailLabel').innerText = u.email || "Incognito Mode";
                 document.getElementById('userInitials').innerText = (u.displayName || "G")[0].toUpperCase();
                 loadSessions();
             } else {
-                document.getElementById('authOverlay').classList.remove('hidden');
+                overlay.classList.remove('hidden');
+                input.disabled = true;
                 document.getElementById('sessionList').innerHTML = '';
-                document.getElementById('chatArea').innerHTML = '<div class="opacity-30">Session ended.</div>';
             }
         });
 
+        // SESSION MANAGEMENT
         function loadSessions() {
             if (!user) return;
             const sessionsCol = collection(db, 'artifacts', appId, 'users', user.uid, 'sessions');
@@ -222,108 +243,90 @@
                 snap.forEach(docSnap => {
                     const data = docSnap.data();
                     const btn = document.createElement('button');
-                    btn.className = `w-full text-left p-4 rounded-2xl mb-1 transition-all group ${activeSessionId === docSnap.id ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-200' : 'hover:bg-slate-50 text-slate-600'}`;
-                    btn.innerHTML = `
-                        <div class="flex items-center gap-3">
-                            <div class="w-2 h-2 rounded-full ${activeSessionId === docSnap.id ? 'bg-indigo-300' : 'bg-slate-200 group-hover:bg-indigo-400'} transition-colors"></div>
-                            <div class="truncate text-xs font-bold flex-grow">${data.title || 'Draft reflection...'}</div>
-                        </div>
-                    `;
+                    btn.className = `w-full text-left p-4 rounded-2xl mb-1 transition-all group ${activeSessionId === docSnap.id ? 'bg-indigo-600 text-white shadow-lg' : 'hover:bg-slate-50 text-slate-600'}`;
+                    btn.innerHTML = `<div class="truncate text-xs font-bold">${data.title || 'Untitled Session'}</div>`;
                     btn.onclick = () => selectSession(docSnap.id, data.title);
                     list.appendChild(btn);
                 });
-            }, (error) => console.error("Session fetch error:", error));
+            }, (error) => console.error("Sync error:", error));
         }
 
-        async function startNewSession() {
+        window.startNewSession = async () => {
             if (!user) return;
             const sessionsCol = collection(db, 'artifacts', appId, 'users', user.uid, 'sessions');
-            const newDoc = await addDoc(sessionsCol, {
-                title: "Starting new talk...",
-                createdAt: serverTimestamp(),
-                updatedAt: serverTimestamp()
-            });
-            selectSession(newDoc.id, "Starting new talk...");
-        }
+            const newDoc = await addDoc(sessionsCol, { title: "New Talk", createdAt: serverTimestamp(), updatedAt: serverTimestamp() });
+            selectSession(newDoc.id, "New Talk");
+        };
 
         async function selectSession(id, title) {
             if (unsubscribeMessages) unsubscribeMessages();
             activeSessionId = id;
             document.getElementById('currentSessionTitle').innerText = title;
-            document.getElementById('chatArea').innerHTML = '';
-            
-            loadSessions();
-
             const msgCol = collection(db, 'artifacts', appId, 'users', user.uid, 'sessions', id, 'messages');
             unsubscribeMessages = onSnapshot(query(msgCol, orderBy('timestamp', 'asc')), (snap) => {
-                document.getElementById('chatArea').innerHTML = '';
-                if (snap.empty) {
-                    appendUI("I'm listening. How has your week truly been? Any small moment that made you smile or pause today?", "model");
-                }
-                snap.forEach(m => {
-                    const d = m.data();
-                    appendUI(d.text, d.role);
-                });
-            }, (error) => console.error("Message fetch error:", error));
+                const chatArea = document.getElementById('chatArea');
+                chatArea.innerHTML = '';
+                if (snap.empty) appendUI("I'm here to listen. What's on your mind?", "model");
+                snap.forEach(m => appendUI(m.data().text, m.data().role));
+            });
         }
 
-        async function callGemini(messages) {
-            // Secure API call endpoint
+        // AI LOGIC WITH EXPONENTIAL BACKOFF
+        async function callGemini(messages, retries = 5, delay = 1000) {
             const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
-            const system = `You are Glizer, a warm AI therapist. 
-            MANDATORY: If this is the start of a conversation, create a short (2-3 words) title for this session and include it exactly as [TITLE: your title] at the START of your message.
-            PERSONALITY: Be inquisitive and friendly. Ask specific follow-up questions about their feelings.`;
-
             const payload = {
                 contents: messages.map(m => ({ role: m.role === 'user' ? 'user' : 'model', parts: [{ text: m.text }] })),
-                systemInstruction: { parts: [{ text: system }] }
+                systemInstruction: { parts: [{ text: "You are Glizer, a warm AI therapist. If new, lead with a short title in [TITLE: x] format." }] }
             };
 
-            try {
-                const res = await fetch(endpoint, { method: 'POST', body: JSON.stringify(payload) });
-                const data = await res.json();
-                return data.candidates[0].content.parts[0].text;
-            } catch (e) { return "I'm having a little trouble connecting. Could you try sending that again?"; }
+            for (let i = 0; i < retries; i++) {
+                try {
+                    const res = await fetch(endpoint, { method: 'POST', body: JSON.stringify(payload) });
+                    if (!res.ok) throw new Error("API Limit reached");
+                    const data = await res.json();
+                    return data.candidates[0].content.parts[0].text;
+                } catch (e) {
+                    if (i === retries - 1) return "Connection issue. Please check your internet.";
+                    await new Promise(r => setTimeout(r, delay));
+                    delay *= 2;
+                }
+            }
         }
 
         async function sendMessage() {
-            const text = document.getElementById('userInput').value.trim();
-            if (!text || !user) return;
+            const input = document.getElementById('userInput');
+            const text = input.value.trim();
+            if (!text || !user || !activeSessionId) return;
             
-            if (!activeSessionId) await startNewSession();
-            
+            input.value = '';
             const sessionPath = doc(db, 'artifacts', appId, 'users', user.uid, 'sessions', activeSessionId);
             const msgCol = collection(sessionPath, 'messages');
 
-            document.getElementById('userInput').value = '';
             await addDoc(msgCol, { text, role: 'user', timestamp: serverTimestamp() });
-            
             const aiRaw = await callGemini([{ role: 'user', text }]);
             
-            let cleanAiText = aiRaw;
+            let cleanText = aiRaw;
             const titleMatch = aiRaw.match(/\[TITLE:\s*(.*?)\]/);
             if (titleMatch) {
-                const newTitle = titleMatch[1].trim();
-                await updateDoc(sessionPath, { title: newTitle });
-                cleanAiText = aiRaw.replace(/\[TITLE:.*?\]/, '').trim();
+                await updateDoc(sessionPath, { title: titleMatch[1].trim() });
+                cleanText = aiRaw.replace(/\[TITLE:.*?\]/, '').trim();
             }
 
-            await addDoc(msgCol, { text: cleanAiText, role: 'model', timestamp: serverTimestamp() });
+            await addDoc(msgCol, { text: cleanText, role: 'model', timestamp: serverTimestamp() });
             await updateDoc(sessionPath, { updatedAt: serverTimestamp() });
         }
 
         function appendUI(text, role) {
             const chatArea = document.getElementById('chatArea');
             const wrap = document.createElement('div');
-            wrap.className = `flex ${role === 'user' ? 'justify-end' : 'justify-start'} w-full`;
-            wrap.innerHTML = `<div class="message-bubble p-4 ${role === 'user' ? 'user-message shadow-xl shadow-slate-200' : 'ai-message'}">${text}</div>`;
+            wrap.className = `flex ${role === 'user' ? 'justify-end' : 'justify-start'} w-full animate-in slide-in-from-bottom-2`;
+            wrap.innerHTML = `<div class="message-bubble p-4 ${role === 'user' ? 'user-message' : 'ai-message'}">${text}</div>`;
             chatArea.appendChild(wrap);
             chatArea.scrollTop = chatArea.scrollHeight;
         }
 
         document.getElementById('sendBtn').onclick = sendMessage;
         document.getElementById('userInput').onkeydown = (e) => e.key === 'Enter' && sendMessage();
-
     </script>
 </body>
 </html>
